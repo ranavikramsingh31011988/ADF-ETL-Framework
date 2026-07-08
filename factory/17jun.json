@@ -1,0 +1,15 @@
+{
+	"name": "17jun",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ab5ee182-b763-4a07-b729-b2ef00c699a2",
+		"tenantId": "db300840-0de2-4d38-92d1-fa08353210e3"
+	}
+}

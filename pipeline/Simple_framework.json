@@ -1,0 +1,110 @@
+{
+	"name": "Simple_framework",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1_oracle",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT COUNT(*) AS CNT\nFROM HR.EMP",
+						"partitionOption": "None",
+						"numberPrecision": 38,
+						"numberScale": 18,
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "OracleTable1_dataset",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup2_target_Sqlserver",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Lookup1_oracle",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT COUNT(*) AS CNT\nFROM dbo.EMP;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "validation_count_of_rows",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Lookup2_target_Sqlserver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(\nint(activity('Lookup1_oracle').output.firstRow.CNT),\nint(activity('Lookup2_target_Sqlserver').output.firstRow.CNT)\n)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Count mismatch",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Count_match",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-06-26T07:40:07Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

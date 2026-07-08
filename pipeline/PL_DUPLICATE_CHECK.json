@@ -1,0 +1,130 @@
+{
+	"name": "PL_DUPLICATE_CHECK",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup_ETL_config",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "@concat(\n'SELECT *\nFROM ETL_CONFIG\nWHERE VALIDATION_TYPES LIKE ''%DUPLICATE%'' ',\nif(\n    equals(pipeline().parameters.p_TableName,'ALL'),\n    '',\n    concat(\n        'AND TARGET_TABLE IN (''',\n        replace(pipeline().parameters.p_TableName,',',''','''),\n        ''')'\n    )\n)\n)",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup_ETL_config",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup_ETL_config').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "SP_DUPLICATE_CHECK",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[usp_DuplicateCheck]",
+								"storedProcedureParameters": {
+									"CONFIG_ID": {
+										"value": {
+											"value": "@item().CONFIG_ID",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"PRIMARY_KEY_COLUMN": {
+										"value": {
+											"value": "@item().PRIMARY_KEY_COLUMN",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"RUN_ID": {
+										"value": {
+											"value": "@pipeline().RunId",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"TARGET_SCHEMA": {
+										"value": {
+											"value": "@item().TARGET_SCHEMA",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"TARGET_TABLE": {
+										"value": {
+											"value": "@item().TARGET_TABLE",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"TC_ID": {
+										"value": {
+											"value": "@item().TC_ID",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "SqlServer1_Target",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"p_TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-07-08T18:06:50Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

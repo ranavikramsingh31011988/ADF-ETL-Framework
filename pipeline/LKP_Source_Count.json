@@ -1,0 +1,110 @@
+{
+	"name": "LKP_Source_Count",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1_source_oracle",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT COUNT(*) AS CNT\nFROM HR.EMP",
+						"partitionOption": "None",
+						"numberPrecision": 38,
+						"numberScale": 18,
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "OracleTable1_dataset",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup2_target_Sqlserver",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Lookup1_source_oracle",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT COUNT(*) AS CNT\nFROM dbo.EMP;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "validate_row_count",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Lookup2_target_Sqlserver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(\nint(activity('Lookup1_source_oracle').output.firstRow.CNT),\nint(activity('Lookup2_target_Sqlserver').output.firstRow.CNT)\n)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Fail",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "count_match",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-06-24T23:06:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

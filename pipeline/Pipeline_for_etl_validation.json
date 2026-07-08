@@ -1,0 +1,197 @@
+{
+	"name": "Pipeline_for_etl_validation",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1_ETL_Config_table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "SELECT *\nFROM ETL_CONFIG\nWHERE IS_ACTIVE = 'Y'\nAND (\n      '@{pipeline().parameters.p_TC_ID}' = 'ALL'\n      OR TC_ID = '@{pipeline().parameters.p_TC_ID}'\n);",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup1_ETL_Config_table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1_ETL_Config_table').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@item().VALIDATION_TYPE",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "COUNT_CHECK",
+										"activities": [
+											{
+												"name": "Lookup1_SRC_CNT",
+												"type": "Lookup",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"typeProperties": {
+													"source": {
+														"type": "OracleSource",
+														"oracleReaderQuery": {
+															"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().SOURCE_SCHEMA,\n'.',\nitem().SOURCE_TABLE\n)",
+															"type": "Expression"
+														},
+														"partitionOption": "None",
+														"numberPrecision": 38,
+														"numberScale": 18,
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "OracleTable3_DYNAMIC3",
+														"type": "DatasetReference",
+														"parameters": {
+															"pSchema": "@item().SOURCE_SCHEMA",
+															"pTable": "@item().SOURCE_TABLE"
+														}
+													}
+												}
+											},
+											{
+												"name": "Lookup1_TGT_CNT",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Lookup1_SRC_CNT",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().TARGET_SCHEMA,\n'.',\nitem().TARGET_TABLE\n)",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"dataset": {
+														"referenceName": "SqlServerTable3_DYAMIC3",
+														"type": "DatasetReference",
+														"parameters": {
+															"pSchema": "@item().TARGET_SCHEMA",
+															"pTable": "@item().TARGET_TABLE"
+														}
+													}
+												}
+											},
+											{
+												"name": "Stored procedure1",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Lookup1_TGT_CNT",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[dbo].[usp_InsertCountValidationResult]"
+												},
+												"linkedServiceName": {
+													"referenceName": "SqlServer1_Target",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									},
+									{
+										"value": "DATA_COMPARE"
+									},
+									{
+										"value": "NULL_CHECK"
+									},
+									{
+										"value": "DUPLICATE_CHECK"
+									},
+									{
+										"value": "BUSINESS_RULE"
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"p_TC_ID": {
+				"type": "string",
+				"defaultValue": "ALL"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-06-25T22:13:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

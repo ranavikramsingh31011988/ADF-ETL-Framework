@@ -1,0 +1,32 @@
+{
+	"name": "Daily_Validation",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_ETL_Validation_Framework",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2026-06-25T08:03:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						36
+					],
+					"hours": [
+						13
+					]
+				}
+			}
+		}
+	}
+}

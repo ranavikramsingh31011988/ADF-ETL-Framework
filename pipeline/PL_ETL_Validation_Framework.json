@@ -1,0 +1,308 @@
+{
+	"name": "PL_ETL_Validation_Framework",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup_ETL_config",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "SELECT *\nFROM ETL_CONFIG\nWHERE IS_ACTIVE = 'Y'\nAND (\n      '@{pipeline().parameters.p_TC_ID}' = 'ALL'\n      OR TC_ID = '@{pipeline().parameters.p_TC_ID}'\n);",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1_Validate_Tables",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup_ETL_config",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup_ETL_config').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "LKP_Source_Count",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "OracleSource",
+									"oracleReaderQuery": {
+										"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().SOURCE_SCHEMA,\n'.',\nitem().SOURCE_TABLE\n)",
+										"type": "Expression"
+									},
+									"partitionOption": "None",
+									"numberPrecision": 38,
+									"numberScale": 18,
+									"queryTimeout": "02:00:00"
+								},
+								"dataset": {
+									"referenceName": "OracleTable1_dynamic",
+									"type": "DatasetReference",
+									"parameters": {
+										"pSchema": "@item().SOURCE_SCHEMA",
+										"pTable": "@item().SOURCE_TABLE"
+									}
+								}
+							}
+						},
+						{
+							"name": "LKP_Target_Count",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "LKP_Source_Count",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().TARGET_SCHEMA,\n'.',\nitem().TARGET_TABLE\n)",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "SqlServerTable2_dynamic",
+									"type": "DatasetReference",
+									"parameters": {
+										"pSchema": "@item().TARGET_SCHEMA",
+										"pTable": "@item().TARGET_TABLE"
+									}
+								}
+							}
+						},
+						{
+							"name": "IF_Row_Count_Validation",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "LKP_Target_Count",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(\nint(activity('LKP_Source_Count').output.firstRow.CNT),\nint(activity('LKP_Target_Count').output.firstRow.CNT)\n)",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "SP_Audit_FAIL",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[usp_InsertAuditLog]",
+											"storedProcedureParameters": {
+												"COMMENTS": {
+													"value": "'Row count mismatch'",
+													"type": "String"
+												},
+												"CONFIG_ID": {
+													"value": {
+														"value": "@int(item().CONFIG_ID)",
+														"type": "Expression"
+													},
+													"type": "Int32"
+												},
+												"RUN_ID": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"SOURCE_VALUE": {
+													"value": {
+														"value": "@string(activity('LKP_Source_Count').output.firstRow.CNT)",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"STATUS": {
+													"value": "'FAIL'",
+													"type": "String"
+												},
+												"TABLE_NAME": {
+													"value": {
+														"value": "@item().SOURCE_TABLE",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"TARGET_VALUE": {
+													"value": {
+														"value": "@string(activity('LKP_Target_Count').output.firstRow.CNT)",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"VALIDATION_TYPE": {
+													"value": "'ROW_COUNT'",
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "SqlServer1_Target",
+											"type": "LinkedServiceReference"
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "SP_Audit_PASS",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[usp_InsertAuditLog]",
+											"storedProcedureParameters": {
+												"COMMENTS": {
+													"value": "'Row count matched'",
+													"type": "String"
+												},
+												"CONFIG_ID": {
+													"value": {
+														"value": "@int(item().CONFIG_ID)",
+														"type": "Expression"
+													},
+													"type": "Int32"
+												},
+												"RUN_ID": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"SOURCE_VALUE": {
+													"value": {
+														"value": "@string(activity('LKP_Source_Count').output.firstRow.CNT)",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"STATUS": {
+													"value": "'PASS'",
+													"type": "String"
+												},
+												"TABLE_NAME": {
+													"value": {
+														"value": "@item().SOURCE_TABLE",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"TARGET_VALUE": {
+													"value": {
+														"value": "@string(activity('LKP_Target_Count').output.firstRow.CNT)",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"VALIDATION_TYPE": {
+													"value": "'ROW_COUNT'",
+													"type": "String"
+												},
+												"TC_ID": {
+													"value": {
+														"value": "@item().TC_ID",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "SqlServer1_Target",
+											"type": "LinkedServiceReference"
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"p_TC_ID": {
+				"type": "string",
+				"defaultValue": "ALL"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-06-25T08:34:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
