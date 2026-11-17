@@ -1,0 +1,144 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "17jun"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_password": {
+			"value": ""
+		},
+		"Oracle1_password": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"SqlServer1_Target_password": {
+			"value": ""
+		},
+		"SqlServer2_password": {
+			"value": ""
+		},
+		"SqlServer3_password": {
+			"value": ""
+		},
+		"SqlServer4vtstarget_password": {
+			"value": ""
+		},
+		"linkedservice17nov2026_password": {
+			"value": ""
+		},
+		"linkedservicevts_password": {
+			"value": ""
+		},
+		"ls_vts_password": {
+			"value": ""
+		},
+		"sourcelinkedservice11nov_password": {
+			"value": ""
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName": {
+			"value": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"Oracle1_properties_typeProperties_server": {
+			"value": "localhost:1521/xe"
+		},
+		"Oracle1_properties_typeProperties_username": {
+			"value": "hr"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"SqlServer1_Target_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_Target_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"SqlServer1_Target_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"SqlServer3_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer3_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"SqlServer3_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"linkedservice17nov2026_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"linkedservice17nov2026_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"linkedservice17nov2026_properties_typeProperties_userName": {
+			"value": "adf_user"
+		},
+		"linkedservicevts_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"linkedservicevts_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"linkedservicevts_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"ls_vts_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"ls_vts_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"ls_vts_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_userName": {
+			"value": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

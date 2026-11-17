@@ -1,0 +1,363 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "17jun"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LINKEDSERVICESTOLOADTHEDATANOV'"
+		},
+		"Oracle1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Oracle1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServer1_Target_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1_Target'"
+		},
+		"SqlServer2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer2'"
+		},
+		"SqlServer3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer3'"
+		},
+		"SqlServer4vtstarget_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer4vtstarget'"
+		},
+		"linkedservice17nov2026_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedservice17nov2026'"
+		},
+		"linkedservicevts_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedservicevts'"
+		},
+		"ls_vts_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_vts'"
+		},
+		"sourcelinkedservice11nov_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sourcelinkedservice11nov'"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"Oracle1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost:1521/xe"
+		},
+		"Oracle1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "hr"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"SqlServer1_Target_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_Target_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer1_Target_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer3_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer3_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"linkedservice17nov2026_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"linkedservice17nov2026_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"linkedservice17nov2026_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adf_user"
+		},
+		"linkedservicevts_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"linkedservicevts_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"linkedservicevts_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"ls_vts_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_vts_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_vts_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "17jun_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LINKEDSERVICESTOLOADTHEDATANOV_password": {
+						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServer2_password": {
+						"value": "[parameters('SqlServer2_password')]"
+					},
+					"SqlServer3_password": {
+						"value": "[parameters('SqlServer3_password')]"
+					},
+					"linkedservice17nov2026_password": {
+						"value": "[parameters('linkedservice17nov2026_password')]"
+					},
+					"linkedservicevts_password": {
+						"value": "[parameters('linkedservicevts_password')]"
+					},
+					"sourcelinkedservice11nov_password": {
+						"value": "[parameters('sourcelinkedservice11nov_password')]"
+					},
+					"Oracle1_password": {
+						"value": "[parameters('Oracle1_password')]"
+					},
+					"SqlServer1_Target_password": {
+						"value": "[parameters('SqlServer1_Target_password')]"
+					},
+					"SqlServer4vtstarget_password": {
+						"value": "[parameters('SqlServer4vtstarget_password')]"
+					},
+					"ls_vts_password": {
+						"value": "[parameters('ls_vts_password')]"
+					},
+					"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
+						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server')]"
+					},
+					"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database": {
+						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database')]"
+					},
+					"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName": {
+						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"SqlServer2_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_server')]"
+					},
+					"SqlServer2_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_database')]"
+					},
+					"SqlServer2_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
+					},
+					"SqlServer3_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer3_properties_typeProperties_server')]"
+					},
+					"SqlServer3_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer3_properties_typeProperties_database')]"
+					},
+					"SqlServer3_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer3_properties_typeProperties_userName')]"
+					},
+					"linkedservice17nov2026_properties_typeProperties_server": {
+						"value": "[parameters('linkedservice17nov2026_properties_typeProperties_server')]"
+					},
+					"linkedservice17nov2026_properties_typeProperties_database": {
+						"value": "[parameters('linkedservice17nov2026_properties_typeProperties_database')]"
+					},
+					"linkedservice17nov2026_properties_typeProperties_userName": {
+						"value": "[parameters('linkedservice17nov2026_properties_typeProperties_userName')]"
+					},
+					"linkedservicevts_properties_typeProperties_server": {
+						"value": "[parameters('linkedservicevts_properties_typeProperties_server')]"
+					},
+					"linkedservicevts_properties_typeProperties_database": {
+						"value": "[parameters('linkedservicevts_properties_typeProperties_database')]"
+					},
+					"linkedservicevts_properties_typeProperties_userName": {
+						"value": "[parameters('linkedservicevts_properties_typeProperties_userName')]"
+					},
+					"sourcelinkedservice11nov_properties_typeProperties_server": {
+						"value": "[parameters('sourcelinkedservice11nov_properties_typeProperties_server')]"
+					},
+					"sourcelinkedservice11nov_properties_typeProperties_database": {
+						"value": "[parameters('sourcelinkedservice11nov_properties_typeProperties_database')]"
+					},
+					"sourcelinkedservice11nov_properties_typeProperties_userName": {
+						"value": "[parameters('sourcelinkedservice11nov_properties_typeProperties_userName')]"
+					},
+					"Oracle1_properties_typeProperties_server": {
+						"value": "[parameters('Oracle1_properties_typeProperties_server')]"
+					},
+					"Oracle1_properties_typeProperties_username": {
+						"value": "[parameters('Oracle1_properties_typeProperties_username')]"
+					},
+					"SqlServer1_Target_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_Target_properties_typeProperties_server')]"
+					},
+					"SqlServer1_Target_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_Target_properties_typeProperties_database')]"
+					},
+					"SqlServer1_Target_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_Target_properties_typeProperties_userName')]"
+					},
+					"SqlServer4vtstarget_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer4vtstarget_properties_typeProperties_server')]"
+					},
+					"SqlServer4vtstarget_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer4vtstarget_properties_typeProperties_database')]"
+					},
+					"SqlServer4vtstarget_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer4vtstarget_properties_typeProperties_userName')]"
+					},
+					"ls_vts_properties_typeProperties_server": {
+						"value": "[parameters('ls_vts_properties_typeProperties_server')]"
+					},
+					"ls_vts_properties_typeProperties_database": {
+						"value": "[parameters('ls_vts_properties_typeProperties_database')]"
+					},
+					"ls_vts_properties_typeProperties_userName": {
+						"value": "[parameters('ls_vts_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "17jun_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', '17jun_ArmTemplate_0')]"
+			]
+		}
+	]
+}

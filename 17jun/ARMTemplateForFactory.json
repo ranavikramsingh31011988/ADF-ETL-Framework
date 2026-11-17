@@ -1,0 +1,2176 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "17jun"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LINKEDSERVICESTOLOADTHEDATANOV'"
+		},
+		"Oracle1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Oracle1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServer1_Target_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1_Target'"
+		},
+		"SqlServer2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer2'"
+		},
+		"SqlServer3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer3'"
+		},
+		"SqlServer4vtstarget_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer4vtstarget'"
+		},
+		"linkedservice17nov2026_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedservice17nov2026'"
+		},
+		"linkedservicevts_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedservicevts'"
+		},
+		"ls_vts_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_vts'"
+		},
+		"sourcelinkedservice11nov_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'sourcelinkedservice11nov'"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"Oracle1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost:1521/xe"
+		},
+		"Oracle1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "hr"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"SqlServer1_Target_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_Target_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer1_Target_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer3_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer3_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"SqlServer4vtstarget_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"linkedservice17nov2026_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"linkedservice17nov2026_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"linkedservice17nov2026_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adf_user"
+		},
+		"linkedservicevts_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"linkedservicevts_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"linkedservicevts_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"ls_vts_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_vts_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_vts_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"sourcelinkedservice11nov_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ETL_FRAMEWORK1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup_ETL_config",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": {
+									"value": "SELECT *\nFROM ETL_CONFIG\nWHERE IS_ACTIVE = 'Y'\nAND (\n      '@{pipeline().parameters.p_TC_ID}' = 'ALL'\n      OR TC_ID = '@{pipeline().parameters.p_TC_ID}'\n);",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach1_Validate_Tables",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup_ETL_config",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup_ETL_config').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "IF_count_Check",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@contains(item().VALIDATION_TYPES,'COUNT')",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "LKP_Source_Count",
+												"type": "Lookup",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "OracleSource",
+														"oracleReaderQuery": {
+															"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().SOURCE_SCHEMA,\n'.',\nitem().SOURCE_TABLE\n)",
+															"type": "Expression"
+														},
+														"partitionOption": "None",
+														"numberPrecision": 38,
+														"numberScale": 18,
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "OracleTable1_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"pSchema": "@item().SOURCE_SCHEMA",
+															"pTable": "@item().SOURCE_TABLE"
+														}
+													}
+												}
+											},
+											{
+												"name": "LKP_Target_Count",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "LKP_Source_Count",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().TARGET_SCHEMA,\n'.',\nitem().TARGET_TABLE\n)",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"dataset": {
+														"referenceName": "SqlServerTable2_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"pSchema": "@item().TARGET_SCHEMA",
+															"pTable": "@item().TARGET_TABLE"
+														}
+													}
+												}
+											},
+											{
+												"name": "SP_Log_Count_Result",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "LKP_Target_Count",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[SP_LOG_VALIDATION_RESULT]",
+													"storedProcedureParameters": {
+														"SOURCE_COUNT": {
+															"value": {
+																"value": "@activity('LKP_Source_Count').output.firstRow.CNT",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"STATUS": {
+															"value": {
+																"value": "@if(\nequals(\nactivity('LKP_Source_Count').output.firstRow.CNT,\nactivity('LKP_Target_Count').output.firstRow.CNT\n),\n'PASS',\n'FAIL'\n)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TARGET_COUNT": {
+															"value": {
+																"value": "@activity('LKP_Target_Count').output.firstRow.CNT",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"TC_ID": {
+															"value": {
+																"value": "@item().TC_ID",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"VALIDATION_TYPE": {
+															"value": {
+																"value": "@item().VALIDATION_TYPE",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "SqlServer1_Target",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"p_TC_ID": {
+						"type": "string",
+						"defaultValue": "ALL"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-26T13:27:06Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
+				"[concat(variables('factoryId'), '/datasets/OracleTable1_dynamic')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_dynamic')]",
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LKP_Source_Count')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup1_source_oracle",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT COUNT(*) AS CNT\nFROM HR.EMP",
+								"partitionOption": "None",
+								"numberPrecision": 38,
+								"numberScale": 18,
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "OracleTable1_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Lookup2_target_Sqlserver",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Lookup1_source_oracle",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT COUNT(*) AS CNT\nFROM dbo.EMP;",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "validate_row_count",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Lookup2_target_Sqlserver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(\nint(activity('Lookup1_source_oracle').output.firstRow.CNT),\nint(activity('Lookup2_target_Sqlserver').output.firstRow.CNT)\n)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Fail",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "count_match",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-24T23:06:49Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OracleTable1_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_DATA_COMPARE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1_Validate_Tables",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup_ETL_config",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup_ETL_config').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "OracleSource",
+											"partitionOption": "None",
+											"numberPrecision": 38,
+											"numberScale": 18,
+											"queryTimeout": "02:00:00"
+										},
+										"sink": {
+											"type": "SqlServerSink",
+											"writeBehavior": "insert",
+											"sqlWriterUseTableLock": false
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "OracleTable1_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"pSchema": {
+													"value": "@item().SOURCE_SCHEMA",
+													"type": "Expression"
+												},
+												"pTable": {
+													"value": "@item().SOURCE_TABLE",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "SqlServerTable2_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"pSchema": "@item().TARGET_SCHEMA",
+												"pTable": "@concat('STG_', item().TARGET_TABLE)"
+											}
+										}
+									]
+								},
+								{
+									"name": "Stored procedure1",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "Copy data1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[usp_DataCompare]",
+										"storedProcedureParameters": {
+											"Run_ID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"SourceSchema": {
+												"value": {
+													"value": "@item().SOURCE_SCHEMA",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"SourceTable": {
+												"value": {
+													"value": "@item().SOURCE_TABLE",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TargetSchema": {
+												"value": {
+													"value": "@item().TARGET_SCHEMA",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TargetTable": {
+												"value": {
+													"value": "@item().TARGET_TABLE",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "SqlServer1_Target",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Lookup_ETL_config",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n'SELECT *\nFROM ETL_CONFIG\nWHERE IS_ACTIVE = ''Y''\nAND TARGET_TABLE IN (''',\nreplace(pipeline().parameters.p_TableName, ',', ''','''),\n''')'\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"p_TableName": {
+						"type": "string",
+						"defaultValue": "ALL"
+					}
+				},
+				"variables": {
+					"p_TableName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-30T13:22:49Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
+				"[concat(variables('factoryId'), '/datasets/OracleTable1_dynamic')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_dynamic')]",
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_DUPLICATE_CHECK')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup_ETL_config",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": {
+									"value": "@concat(\n'SELECT *\nFROM ETL_CONFIG\nWHERE VALIDATION_TYPES LIKE ''%DUPLICATE%'' ',\nif(\n    equals(pipeline().parameters.p_TableName,'ALL'),\n    '',\n    concat(\n        'AND TARGET_TABLE IN (''',\n        replace(pipeline().parameters.p_TableName,',',''','''),\n        ''')'\n    )\n)\n)",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup_ETL_config",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup_ETL_config').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "SP_DUPLICATE_CHECK",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[usp_DuplicateCheck]",
+										"storedProcedureParameters": {
+											"CONFIG_ID": {
+												"value": {
+													"value": "@item().CONFIG_ID",
+													"type": "Expression"
+												},
+												"type": "Int32"
+											},
+											"PRIMARY_KEY_COLUMN": {
+												"value": {
+													"value": "@item().PRIMARY_KEY_COLUMN",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"RUN_ID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TARGET_SCHEMA": {
+												"value": {
+													"value": "@item().TARGET_SCHEMA",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TARGET_TABLE": {
+												"value": {
+													"value": "@item().TARGET_TABLE",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TC_ID": {
+												"value": {
+													"value": "@item().TC_ID",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "SqlServer1_Target",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"p_TableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-07-08T18:06:50Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_ETL_Validation_Framework')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup_ETL_config",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": {
+									"value": "SELECT *\nFROM ETL_CONFIG\nWHERE IS_ACTIVE = 'Y'\nAND (\n      '@{pipeline().parameters.p_TC_ID}' = 'ALL'\n      OR TC_ID = '@{pipeline().parameters.p_TC_ID}'\n);",
+									"type": "Expression"
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "ForEach1_Validate_Tables",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup_ETL_config",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup_ETL_config').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "LKP_Source_Count",
+									"type": "Lookup",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "OracleSource",
+											"oracleReaderQuery": {
+												"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().SOURCE_SCHEMA,\n'.',\nitem().SOURCE_TABLE\n)",
+												"type": "Expression"
+											},
+											"partitionOption": "None",
+											"numberPrecision": 38,
+											"numberScale": 18,
+											"queryTimeout": "02:00:00"
+										},
+										"dataset": {
+											"referenceName": "OracleTable1_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"pSchema": "@item().SOURCE_SCHEMA",
+												"pTable": "@item().SOURCE_TABLE"
+											}
+										}
+									}
+								},
+								{
+									"name": "LKP_Target_Count",
+									"type": "Lookup",
+									"dependsOn": [
+										{
+											"activity": "LKP_Source_Count",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": {
+												"value": "@concat(\n'SELECT COUNT(*) AS CNT FROM ',\nitem().TARGET_SCHEMA,\n'.',\nitem().TARGET_TABLE\n)",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"dataset": {
+											"referenceName": "SqlServerTable2_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"pSchema": "@item().TARGET_SCHEMA",
+												"pTable": "@item().TARGET_TABLE"
+											}
+										}
+									}
+								},
+								{
+									"name": "IF_Row_Count_Validation",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "LKP_Target_Count",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(\nint(activity('LKP_Source_Count').output.firstRow.CNT),\nint(activity('LKP_Target_Count').output.firstRow.CNT)\n)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "SP_Audit_FAIL",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[usp_InsertAuditLog]",
+													"storedProcedureParameters": {
+														"COMMENTS": {
+															"value": "'Row count mismatch'",
+															"type": "String"
+														},
+														"CONFIG_ID": {
+															"value": {
+																"value": "@int(item().CONFIG_ID)",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"RUN_ID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"SOURCE_VALUE": {
+															"value": {
+																"value": "@string(activity('LKP_Source_Count').output.firstRow.CNT)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"STATUS": {
+															"value": "'FAIL'",
+															"type": "String"
+														},
+														"TABLE_NAME": {
+															"value": {
+																"value": "@item().SOURCE_TABLE",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TARGET_VALUE": {
+															"value": {
+																"value": "@string(activity('LKP_Target_Count').output.firstRow.CNT)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"VALIDATION_TYPE": {
+															"value": "'ROW_COUNT'",
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "SqlServer1_Target",
+													"type": "LinkedServiceReference"
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "SP_Audit_PASS",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[usp_InsertAuditLog]",
+													"storedProcedureParameters": {
+														"COMMENTS": {
+															"value": "'Row count matched'",
+															"type": "String"
+														},
+														"CONFIG_ID": {
+															"value": {
+																"value": "@int(item().CONFIG_ID)",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														},
+														"RUN_ID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"SOURCE_VALUE": {
+															"value": {
+																"value": "@string(activity('LKP_Source_Count').output.firstRow.CNT)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"STATUS": {
+															"value": "'PASS'",
+															"type": "String"
+														},
+														"TABLE_NAME": {
+															"value": {
+																"value": "@item().SOURCE_TABLE",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TARGET_VALUE": {
+															"value": {
+																"value": "@string(activity('LKP_Target_Count').output.firstRow.CNT)",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"VALIDATION_TYPE": {
+															"value": "'ROW_COUNT'",
+															"type": "String"
+														},
+														"TC_ID": {
+															"value": {
+																"value": "@item().TC_ID",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "SqlServer1_Target",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"p_TC_ID": {
+						"type": "string",
+						"defaultValue": "ALL"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-25T08:34:48Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
+				"[concat(variables('factoryId'), '/datasets/OracleTable1_dynamic')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_dynamic')]",
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Simple_framework')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup1_oracle",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT COUNT(*) AS CNT\nFROM HR.EMP",
+								"partitionOption": "None",
+								"numberPrecision": 38,
+								"numberScale": 18,
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "OracleTable1_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "Lookup2_target_Sqlserver",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Lookup1_oracle",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT COUNT(*) AS CNT\nFROM dbo.EMP;",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "validation_count_of_rows",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Lookup2_target_Sqlserver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@equals(\nint(activity('Lookup1_oracle').output.firstRow.CNT),\nint(activity('Lookup2_target_Sqlserver').output.firstRow.CNT)\n)",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Count mismatch",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Count_match",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-06-26T07:40:07Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OracleTable1_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline111112026')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTable2vts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SqlServerTable2_targetvts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_targetvts')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline111112027_vts')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTable2vts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SqlServerTable2_targetvts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_targetvts')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline111112027sourceandtarget')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTable2vts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SqlServerTable2_targetvts",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2_targetvts')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OracleTable1_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "HR",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OracleTable1_dynamic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pSchema": {
+						"type": "string"
+					},
+					"pTable": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().pSchema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().pTable",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OracleTable3_DYNAMIC3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Oracle1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pSchema": {
+						"type": "string"
+					},
+					"pTable": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "HR",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Oracle1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1_Target",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2_dynamic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1_Target",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pSchema": {
+						"type": "string"
+					},
+					"pTable": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@{dataset().pSchema}",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@{dataset().pTable}",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2_targetvts')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer4vtstarget",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "target"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer4vtstarget')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2vts')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_vts",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_vts')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable3_DYAMIC3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1_Target",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pSchema": {
+						"type": "string"
+					},
+					"pTable": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@{dataset().pSchema}",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@{dataset().pTable}",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1_Target')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LINKEDSERVICESTOLOADTHEDATANOV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server')]",
+					"database": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "Windows",
+					"userName": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Oracle1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "linked service for oracle",
+				"annotations": [],
+				"type": "Oracle",
+				"version": "2.0",
+				"typeProperties": {
+					"server": "[parameters('Oracle1_properties_typeProperties_server')]",
+					"authenticationType": "Basic",
+					"username": "[parameters('Oracle1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Oracle1_password')]"
+					},
+					"encryptionClient": "accepted",
+					"encryptionTypesClient": "(AES128, AES192, AES256, 3DES112, 3DES168)",
+					"cryptoChecksumClient": "accepted",
+					"cryptoChecksumTypesClient": "(SHA1, SHA256, SHA384, SHA512)"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer1_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer1_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1_Target')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer1_Target_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer1_Target_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer1_Target_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_Target_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer2_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer2_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer2_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer3_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer3_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer3_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer3_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer4vtstarget')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer4vtstarget_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer4vtstarget_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer4vtstarget_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer4vtstarget_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedservice17nov2026')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('linkedservice17nov2026_properties_typeProperties_server')]",
+					"database": "[parameters('linkedservice17nov2026_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "Windows",
+					"userName": "[parameters('linkedservice17nov2026_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('linkedservice17nov2026_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedservicevts')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('linkedservicevts_properties_typeProperties_server')]",
+					"database": "[parameters('linkedservicevts_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('linkedservicevts_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('linkedservicevts_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_vts')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('ls_vts_properties_typeProperties_server')]",
+					"database": "[parameters('ls_vts_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('ls_vts_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_vts_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/sourcelinkedservice11nov')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('sourcelinkedservice11nov_properties_typeProperties_server')]",
+					"database": "[parameters('sourcelinkedservice11nov_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "Windows",
+					"userName": "[parameters('sourcelinkedservice11nov_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('sourcelinkedservice11nov_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Daily_Validation')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_ETL_Validation_Framework",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2026-06-25T08:03:00",
+						"timeZone": "India Standard Time",
+						"schedule": {
+							"minutes": [
+								36
+							],
+							"hours": [
+								13
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_ETL_Validation_Framework')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {
+					"selfContainedInteractiveAuthoringEnabled": true
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
