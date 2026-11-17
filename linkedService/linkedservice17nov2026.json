@@ -1,0 +1,17 @@
+{
+	"name": "linkedservice17nov2026",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost\\SQLEXPRESS",
+			"database": "master",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "Windows",
+			"userName": "adf_user",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDM3NUY2RjY3LTIyN0QtNEQ0QS05QzA1LTBFQjZBQTc0NDM5Nl9jNDY2ODRhNS0yMmQ4LTRiY2MtYTlmYi00MjhlN2UyNzAwMzYiDQp9"
+		}
+	}
+}
