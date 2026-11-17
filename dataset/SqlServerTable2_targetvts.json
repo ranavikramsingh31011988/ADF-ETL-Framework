@@ -1,0 +1,12 @@
+{
+	"name": "SqlServerTable2_targetvts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer4vtstarget",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}

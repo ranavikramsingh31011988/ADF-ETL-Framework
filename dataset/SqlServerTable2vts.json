@@ -1,0 +1,12 @@
+{
+	"name": "SqlServerTable2vts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_vts",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
