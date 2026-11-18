@@ -51,6 +51,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'sourcelinkedservice11nov'"
 		},
+		"ls_18nov_26_source_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_18nov_26_source'"
+		},
+		"ls_target_18nov2026_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_target_18nov2026'"
+		},
 		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "localhost\\SQLEXPRESS"
@@ -178,6 +186,30 @@
 		"sourcelinkedservice11nov_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"ls_18nov_26_source_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_18nov_26_source_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_18nov_26_source_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"ls_target_18nov2026_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_target_18nov2026_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_target_18nov2026_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
 		}
 	},
 	"variables": {
@@ -2171,6 +2203,249 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline18nov2026')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_18nov2026_source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "target_18nov2026",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_18nov2026_source')]",
+				"[concat(variables('factoryId'), '/datasets/target_18nov2026')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_18nov_26_source')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('ls_18nov_26_source_properties_typeProperties_server')]",
+					"database": "[parameters('ls_18nov_26_source_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('ls_18nov_26_source_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_18nov_26_source_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_18nov2026_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_18nov_26_source",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_18nov_26_source')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_target_18nov2026')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('ls_target_18nov2026_properties_typeProperties_server')]",
+					"database": "[parameters('ls_target_18nov2026_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('ls_target_18nov2026_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_target_18nov2026_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/target_18nov2026')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_target_18nov2026",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "target"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_target_18nov2026')]"
+			]
 		}
 	]
 }

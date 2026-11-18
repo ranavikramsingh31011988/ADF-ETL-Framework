@@ -38,6 +38,12 @@
 		"sourcelinkedservice11nov_password": {
 			"value": ""
 		},
+		"ls_18nov_26_source_password": {
+			"value": ""
+		},
+		"ls_target_18nov2026_password": {
+			"value": ""
+		},
 		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
 			"value": "localhost\\SQLEXPRESS"
 		},
@@ -133,6 +139,24 @@
 		},
 		"sourcelinkedservice11nov_properties_typeProperties_userName": {
 			"value": "DESKTOP-BC3CCN7\\DELL"
+		},
+		"ls_18nov_26_source_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"ls_18nov_26_source_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"ls_18nov_26_source_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"ls_target_18nov2026_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"ls_target_18nov2026_properties_typeProperties_database": {
+			"value": "master"
+		},
+		"ls_target_18nov2026_properties_typeProperties_userName": {
+			"value": "sa"
 		},
 		"containerUri": {
 			"value": ""

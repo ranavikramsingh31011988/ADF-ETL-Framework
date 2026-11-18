@@ -13,6 +13,216 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2vts')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_vts",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable3_DYAMIC3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1_Target",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"pSchema": {
+						"type": "string"
+					},
+					"pTable": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@{dataset().pSchema}",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@{dataset().pTable}",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_18nov2026_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_18nov_26_source",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EMP"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/target_18nov2026')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_target_18nov2026",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EMPNO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ENAME",
+						"type": "varchar"
+					},
+					{
+						"name": "JOB",
+						"type": "varchar"
+					},
+					{
+						"name": "MGR",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "HIREDATE",
+						"type": "date"
+					},
+					{
+						"name": "SAL",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "COMM",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "DEPTNO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "target"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ETL_FRAMEWORK1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1184,7 +1394,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline111112027_vts')]",
@@ -1246,7 +1458,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline111112027sourceandtarget')]",
@@ -1308,7 +1522,74 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2vts')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline18nov2026')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_18nov2026_source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "target_18nov2026",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_18nov2026_source')]",
+				"[concat(variables('factoryId'), '/datasets/target_18nov2026')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily_Validation')]",

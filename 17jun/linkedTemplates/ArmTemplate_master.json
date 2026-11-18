@@ -51,6 +51,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'sourcelinkedservice11nov'"
 		},
+		"ls_18nov_26_source_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_18nov_26_source'"
+		},
+		"ls_target_18nov2026_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_target_18nov2026'"
+		},
 		"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "localhost\\SQLEXPRESS"
@@ -179,6 +187,30 @@
 			"type": "string",
 			"defaultValue": "DESKTOP-BC3CCN7\\DELL"
 		},
+		"ls_18nov_26_source_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_18nov_26_source_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_18nov_26_source_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"ls_target_18nov2026_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"ls_target_18nov2026_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "master"
+		},
+		"ls_target_18nov2026_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -238,6 +270,12 @@
 					},
 					"ls_vts_password": {
 						"value": "[parameters('ls_vts_password')]"
+					},
+					"ls_18nov_26_source_password": {
+						"value": "[parameters('ls_18nov_26_source_password')]"
+					},
+					"ls_target_18nov2026_password": {
+						"value": "[parameters('ls_target_18nov2026_password')]"
 					},
 					"LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server": {
 						"value": "[parameters('LINKEDSERVICESTOLOADTHEDATANOV_properties_typeProperties_server')]"
@@ -334,6 +372,24 @@
 					},
 					"ls_vts_properties_typeProperties_userName": {
 						"value": "[parameters('ls_vts_properties_typeProperties_userName')]"
+					},
+					"ls_18nov_26_source_properties_typeProperties_server": {
+						"value": "[parameters('ls_18nov_26_source_properties_typeProperties_server')]"
+					},
+					"ls_18nov_26_source_properties_typeProperties_database": {
+						"value": "[parameters('ls_18nov_26_source_properties_typeProperties_database')]"
+					},
+					"ls_18nov_26_source_properties_typeProperties_userName": {
+						"value": "[parameters('ls_18nov_26_source_properties_typeProperties_userName')]"
+					},
+					"ls_target_18nov2026_properties_typeProperties_server": {
+						"value": "[parameters('ls_target_18nov2026_properties_typeProperties_server')]"
+					},
+					"ls_target_18nov2026_properties_typeProperties_database": {
+						"value": "[parameters('ls_target_18nov2026_properties_typeProperties_database')]"
+					},
+					"ls_target_18nov2026_properties_typeProperties_userName": {
+						"value": "[parameters('ls_target_18nov2026_properties_typeProperties_userName')]"
 					}
 				}
 			},
